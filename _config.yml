@@ -1,0 +1,12 @@
+categories:
+    pagination: 2
+    directory: .
+    details:
+      blog:
+        title: Blog
+        pagination: 5
+        layout: category.html
+      portfolio:
+        title: Portfolio
+        layout: category.html
+
