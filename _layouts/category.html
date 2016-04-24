@@ -1,0 +1,42 @@
+---
+layout: default
+---
+<div class="post-list">
+    {% for post in page.posts %}
+    <div class="post">
+      <header class="post-header">
+        <h1 class="post-title">
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h1>
+        <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}
+            {% if post.meta %} &middot; {{ post.meta }}{% endif %}</p>
+      </header>
+      <article class="post-content">
+        <!-- Display whole post -->
+        <!-- {{ post.excerpt | markdownify }} -->
+        
+        <!-- Display part of post -->
+        {{ post.content | split:"<!-- more -->" | first | strip_html | truncate:300 }}
+        {% if post.content | size > 300 %}
+            <a href="{{ site.baseurl }}{{ post.url }}"><strong>Read more</strong></a>
+        {% endif %}
+      </article>
+      <hr/>
+    </div>
+    {% endfor %}
+
+    {% if page.pages > 1 %}
+    <div class="pagination">
+      {% if page.nextUrl %}
+        <a class="pagination-item older" href="{{ page.nextUrl | prepend: site.baseurl }}">Older</a>
+      {% else %}
+        <span class="pagination-item older">Older</span>
+      {% endif %}
+      {% if page.prevUrl %}
+        <a class="pagination-item newer" href="{{ page.prevUrl | prepend: site.baseurl }}">Newer</a>
+      {% else %}
+        <span class="pagination-item newer">Newer</span>
+      {% endif %}
+    </div>
+    {% endif %}
+</div>
