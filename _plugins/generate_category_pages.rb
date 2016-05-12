@@ -55,6 +55,10 @@ module Jekyll
         list = list.sort! { |a,b| b.date <=> a.date }
         # Put each page file in a subfolder of dir
         dir = File.join(dir, category)
+        
+        # Remove draft post
+        list.each {|post| list.delete(post) if post.data['draft']  }
+          
         # Calculate number of pages
         pages = (list.length.to_f / detail['pagination'] ).ceil
 
@@ -82,6 +86,7 @@ module Jekyll
         
         # Fetch all category via posts
         site.posts.docs.each do |post|
+          p post
           post.data['categories'].each do |category| 
             (categories[category] ||= []) << post
           end
